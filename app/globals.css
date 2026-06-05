@@ -1,0 +1,76 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400&display=swap");
+@import "tailwindcss";
+@import "../public/dist/bundle.css";
+
+/* Custom styles for our AI Engineer / Developer recreation */
+:root {
+  --background: #000000;
+  --foreground: #ffffff;
+}
+
+body {
+  background-color: #000000;
+  color: #ffffff;
+  overflow: hidden; /* Hide normal scrollbars as the page uses smooth scrollbar */
+}
+
+/* Frosted glass skill description overlay */
+#skill-desc-overlay {
+  position: fixed;
+  bottom: 85px;
+  left: 50%;
+  transform: translate3d(-50%, 15px, 0);
+  width: 90%;
+  max-width: 440px;
+  background: rgba(12, 12, 14, 0.65);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  padding: 20px 24px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s cubic-bezier(0.25, 1, 0.5, 1), transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  z-index: 100;
+  font-family: "IBM Plex Mono", monospace;
+  text-align: left;
+}
+
+#skill-desc-overlay.visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate3d(-50%, 0, 0);
+}
+
+#skill-desc-overlay .skill-title-wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+#skill-desc-overlay .skill-title {
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  transition: color 0.3s ease;
+}
+
+#skill-desc-overlay .skill-shape-name {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 4px;
+  padding: 1px 6px;
+  text-transform: uppercase;
+}
+
+#skill-desc-overlay .skill-desc {
+  font-size: 13px;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 300;
+}
+
