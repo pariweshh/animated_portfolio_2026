@@ -64,11 +64,18 @@ const skillsMetadata: Record<string, SkillData> = {
   },
   "Claude Code": {
     name: "Claude Code",
-    shape: "3D Golden Ring",
-    color: "#D97706",
+    shape: "Claude Logo",
+    color: "#D97757",
     desc: "State-of-the-art developer agent orchestration and task execution powered by Anthropic's Claude. Autonomous planning, editing, and execution loops.",
-    shapeIdx: 8.0
-  }
+    shapeIdx: 8.0,
+  },
+  Redux: {
+    name: "Redux",
+    shape: "Redux Triquetra",
+    color: "#764ABC",
+    desc: "Predictable state container for JavaScript apps. Centralized state management, middleware integration, Redux Toolkit, and robust data flow synchronization.",
+    shapeIdx: 9.0,
+  },
 };
 
 export default function Home() {
@@ -121,7 +128,7 @@ export default function Home() {
     // 3. Poll for WebGL instance and initialize interactivity
     const checkTimer = setInterval(() => {
       const app = (window as any).portfolioApp;
-      if (app && app.clientsR && app.clientsR.length >= 8) {
+      if (app && app.clientsR && app.clientsR.length >= 9) {
         clearInterval(checkTimer);
         cleanupInteractivity = setupWebGLInteractivity(app);
       }
@@ -156,7 +163,7 @@ export default function Home() {
           return;
         }
 
-        if (app.clientsR && app.clientsR.length >= 8) {
+        if (app.clientsR && app.clientsR.length >= 9) {
           raycaster.setFromCamera(mouse, app.camera);
 
           let clickedSkill: any = null;
@@ -396,7 +403,7 @@ export default function Home() {
           }
         }
 
-        if (app.clientsR && app.clientsR.length >= 8) {
+        if (app.clientsR && app.clientsR.length >= 9) {
           raycaster.setFromCamera(mouse, app.camera);
 
           let foundSkill: any = null;
