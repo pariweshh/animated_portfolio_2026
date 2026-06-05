@@ -266,6 +266,16 @@ export default function Home() {
             });
           }
         }
+
+        if (app.cameraMouseStrength) {
+          gsap.killTweensOf(app.cameraMouseStrength);
+          gsap.to(app.cameraMouseStrength, {
+            x: 0.002,
+            y: 0.002,
+            duration: 1.5,
+            ease: "power3.out"
+          });
+        }
       };
 
       const resetFocus = () => {
@@ -325,6 +335,16 @@ export default function Home() {
             });
           }
         }
+
+        if (app.cameraMouseStrength) {
+          gsap.killTweensOf(app.cameraMouseStrength);
+          gsap.to(app.cameraMouseStrength, {
+            x: 0.08,
+            y: 0.12,
+            duration: 1.2,
+            ease: "power3.out"
+          });
+        }
       };
 
       const onScroll = () => {
@@ -346,8 +366,36 @@ export default function Home() {
         window.addEventListener("scroll", onScroll);
       }
 
+      let lastMouseX = mouse.x;
+      let lastMouseY = mouse.y;
+      let mouseSpeed = 0.0;
+
       let rafId: number;
       const tick = () => {
+        // Calculate mouse velocity in NDC space
+        let instantSpeed = 0.0;
+        if (lastMouseX > -900 && mouse.x > -900) {
+          const dx = mouse.x - lastMouseX;
+          const dy = mouse.y - lastMouseY;
+          instantSpeed = Math.sqrt(dx * dx + dy * dy);
+        }
+        // Smoothly low-pass filter (lerp) the speed
+        mouseSpeed += (instantSpeed - mouseSpeed) * 0.1;
+
+        lastMouseX = mouse.x;
+        lastMouseY = mouse.y;
+
+        // Feed uMouseSpeed to the particles shader uniform
+        if (app && app.desert && app.desert.particles && app.desert.particles.material) {
+          const u = app.desert.particles.material.uniforms;
+          if (u) {
+            if (!u.uMouseSpeed) {
+              u.uMouseSpeed = { value: 0.0 };
+            }
+            u.uMouseSpeed.value = mouseSpeed;
+          }
+        }
+
         if (app.clientsR && app.clientsR.length >= 8) {
           raycaster.setFromCamera(mouse, app.camera);
 
