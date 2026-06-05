@@ -13,54 +13,54 @@ interface SkillData {
 }
 
 const skillsMetadata: Record<string, SkillData> = {
-  "React": {
+  React: {
     name: "React",
     shape: "React Atom",
     color: "#61DAFB",
     desc: "Interactive user interfaces built with React's component-driven architecture, virtual DOM rendering, state managers, and React Server Components.",
-    shapeIdx: 1.0
+    shapeIdx: 1.0,
   },
   "Next.js": {
     name: "Next.js",
     shape: "Stylized N Circle",
     color: "#FFFFFF",
     desc: "High-performance full-stack web applications utilizing Next.js Server Components, App Router, incremental static regeneration (ISR), and optimized asset preloading.",
-    shapeIdx: 3.0
+    shapeIdx: 3.0,
   },
-  "TypeScript": {
+  TypeScript: {
     name: "TypeScript",
     shape: "3D Wireframe Cube",
     color: "#3178C6",
     desc: "Robust, enterprise-grade application logic written in TypeScript. Strict static typing, advanced type algebra, and deep compile-time safety guards.",
-    shapeIdx: 5.0
+    shapeIdx: 5.0,
   },
   "Three.js": {
     name: "Three.js",
     shape: "3D Tetrahedron",
     color: "#FF4B4B",
     desc: "Immersive 3D graphics, procedural particle structures, mathematical morphing, custom GLSL shaders, and real-time WebGL rendering pipelines.",
-    shapeIdx: 2.0
+    shapeIdx: 2.0,
   },
   "Node.js": {
     name: "Node.js",
     shape: "3D Hexagonal Prism",
     color: "#339933",
     desc: "Scalable server architectures and developer tooling built on Node.js. Multi-threaded worker pools, streaming I/O, and asynchronous event loops.",
-    shapeIdx: 4.0
+    shapeIdx: 4.0,
   },
-  "Python": {
+  Python: {
     name: "Python",
     shape: "3D Double Helix",
     color: "#3776AB",
     desc: "Scripting, automation, and mathematical models developed in Python. Data analysis pipelines, NumPy matrix manipulation, and clean procedural structures.",
-    shapeIdx: 6.0
+    shapeIdx: 6.0,
   },
   "Gen-AI": {
     name: "Generative AI",
     shape: "3D Sparkle Network",
     color: "#8A2BE2",
     desc: "Advanced Generative AI pipelines, model finetuning, RAG search architectures, agentic flow orchestration, and prompt engineering optimizations.",
-    shapeIdx: 7.0
+    shapeIdx: 7.0,
   },
   "Claude Code": {
     name: "Claude Code",
@@ -98,16 +98,48 @@ export default function Home() {
         data: {},
         items: [
           { name: "scene", source: "/static/model/scene.glb", type: "glb" },
-          { name: "p1", source: "/static/images/particles.png", type: "texture" },
-          { name: "p2", source: "/static/images/particles-2.png", type: "texture" },
-          { name: "p3", source: "/static/images/particles-3.png", type: "texture" },
-          { name: "fogTexture", source: "/static/images/cloud.png", type: "texture" },
-          { name: "visionSound", source: "/static/audio/combo-3/1-vision.mp3", type: "audio" },
-          { name: "craftSound", source: "/static/audio/combo-3/2-craft.mp3", type: "audio" },
-          { name: "experienceSound", source: "/static/audio/combo-3/3-experience.mp3", type: "audio" },
-          { name: "hoverSound", source: "/static/audio/sfx/hover-beep-select.mp3", type: "audio" }
-        ]
-      }
+          {
+            name: "p1",
+            source: "/static/images/particles.png",
+            type: "texture",
+          },
+          {
+            name: "p2",
+            source: "/static/images/particles-2.png",
+            type: "texture",
+          },
+          {
+            name: "p3",
+            source: "/static/images/particles-3.png",
+            type: "texture",
+          },
+          {
+            name: "fogTexture",
+            source: "/static/images/cloud.png",
+            type: "texture",
+          },
+          {
+            name: "visionSound",
+            source: "/static/audio/combo-3/1-vision.mp3",
+            type: "audio",
+          },
+          {
+            name: "craftSound",
+            source: "/static/audio/combo-3/2-craft.mp3",
+            type: "audio",
+          },
+          {
+            name: "experienceSound",
+            source: "/static/audio/combo-3/3-experience.mp3",
+            type: "audio",
+          },
+          {
+            name: "hoverSound",
+            source: "/static/audio/sfx/hover-beep-select.mp3",
+            type: "audio",
+          },
+        ],
+      },
     ];
 
     // 2. Load the bundle.js script dynamically inside client side after DOM mounts
@@ -153,7 +185,10 @@ export default function Home() {
         const loader = document.querySelector(".loader");
         if (loader) {
           const computedStyle = window.getComputedStyle(loader);
-          if (computedStyle.opacity !== "0" && computedStyle.display !== "none") {
+          if (
+            computedStyle.opacity !== "0" &&
+            computedStyle.display !== "none"
+          ) {
             return;
           }
         }
@@ -174,7 +209,10 @@ export default function Home() {
             const box = new THREE.Box3().setFromObject(skill.group);
             box.expandByScalar(0.08);
             const intersectionPoint = new THREE.Vector3();
-            const intersects = raycaster.ray.intersectBox(box, intersectionPoint);
+            const intersects = raycaster.ray.intersectBox(
+              box,
+              intersectionPoint,
+            );
             if (intersects !== null) {
               clickedSkill = skill;
               break;
@@ -217,7 +255,7 @@ export default function Home() {
               onUpdate: () => {
                 c.setScale(c.scaleValue);
                 c.setOpacity(c.opacity);
-              }
+              },
             });
           } else {
             gsap.to(c, {
@@ -228,7 +266,7 @@ export default function Home() {
               onUpdate: () => {
                 c.setScale(c.scaleValue);
                 c.setOpacity(c.opacity);
-              }
+              },
             });
           }
         });
@@ -237,7 +275,7 @@ export default function Home() {
         const targetCamPos = new THREE.Vector3(
           nodePos.x + 0.8,
           nodePos.y + 0.4,
-          nodePos.z + 1.5
+          nodePos.z + 1.5,
         );
 
         gsap.killTweensOf(app.cameraYaw.position);
@@ -248,7 +286,7 @@ export default function Home() {
           y: targetCamPos.y,
           z: targetCamPos.z,
           duration: 1.5,
-          ease: "power3.out"
+          ease: "power3.out",
         });
 
         gsap.to(app.cameraTarget.position, {
@@ -256,12 +294,21 @@ export default function Home() {
           y: nodePos.y,
           z: nodePos.z,
           duration: 1.5,
-          ease: "power3.out"
+          ease: "power3.out",
         });
 
-        if (app.desert && app.desert.particles && app.desert.particles.material) {
+        if (
+          app.desert &&
+          app.desert.particles &&
+          app.desert.particles.material
+        ) {
           const u = app.desert.particles.material.uniforms;
-          if (u && u.uFocusedSkillPos && u.uSkillMorphShape && u.uSkillMorphProgress) {
+          if (
+            u &&
+            u.uFocusedSkillPos &&
+            u.uSkillMorphShape &&
+            u.uSkillMorphProgress
+          ) {
             u.uFocusedSkillPos.value.copy(nodePos);
             u.uSkillMorphShape.value = meta.shapeIdx;
 
@@ -269,7 +316,7 @@ export default function Home() {
             gsap.to(u.uSkillMorphProgress, {
               value: 1.0,
               duration: 1.6,
-              ease: "power3.out"
+              ease: "power3.out",
             });
           }
         }
@@ -280,7 +327,7 @@ export default function Home() {
             x: 0.002,
             y: 0.002,
             duration: 1.5,
-            ease: "power3.out"
+            ease: "power3.out",
           });
         }
       };
@@ -300,7 +347,7 @@ export default function Home() {
             onUpdate: () => {
               c.setScale(c.scaleValue);
               c.setOpacity(c.opacity);
-            }
+            },
           });
         });
 
@@ -316,7 +363,7 @@ export default function Home() {
             ease: "power3.out",
             onComplete: () => {
               originalCamPos = null;
-            }
+            },
           });
 
           gsap.to(app.cameraTarget.position, {
@@ -327,18 +374,22 @@ export default function Home() {
             ease: "power3.out",
             onComplete: () => {
               originalCamTarget = null;
-            }
+            },
           });
         }
 
-        if (app.desert && app.desert.particles && app.desert.particles.material) {
+        if (
+          app.desert &&
+          app.desert.particles &&
+          app.desert.particles.material
+        ) {
           const u = app.desert.particles.material.uniforms;
           if (u && u.uSkillMorphProgress) {
             gsap.killTweensOf(u.uSkillMorphProgress);
             gsap.to(u.uSkillMorphProgress, {
               value: 0.0,
               duration: 1.0,
-              ease: "power2.out"
+              ease: "power2.out",
             });
           }
         }
@@ -349,7 +400,7 @@ export default function Home() {
             x: 0.08,
             y: 0.12,
             duration: 1.2,
-            ease: "power3.out"
+            ease: "power3.out",
           });
         }
       };
@@ -393,7 +444,12 @@ export default function Home() {
         lastMouseY = mouse.y;
 
         // Feed uMouseSpeed to the particles shader uniform
-        if (app && app.desert && app.desert.particles && app.desert.particles.material) {
+        if (
+          app &&
+          app.desert &&
+          app.desert.particles &&
+          app.desert.particles.material
+        ) {
           const u = app.desert.particles.material.uniforms;
           if (u) {
             if (!u.uMouseSpeed) {
@@ -414,7 +470,10 @@ export default function Home() {
             const box = new THREE.Box3().setFromObject(skill.group);
             box.expandByScalar(0.08);
             const intersectionPoint = new THREE.Vector3();
-            const intersects = raycaster.ray.intersectBox(box, intersectionPoint);
+            const intersects = raycaster.ray.intersectBox(
+              box,
+              intersectionPoint,
+            );
             if (intersects !== null) {
               foundSkill = skill;
               break;
@@ -435,7 +494,7 @@ export default function Home() {
                 onUpdate: () => {
                   targetFound.setScale(targetFound.scaleValue);
                   targetFound.setOpacity(targetFound.opacity);
-                }
+                },
               });
             }
 
@@ -449,7 +508,7 @@ export default function Home() {
                 onUpdate: () => {
                   targetHovered.setScale(targetHovered.scaleValue);
                   targetHovered.setOpacity(targetHovered.opacity);
-                }
+                },
               });
             }
 
@@ -494,11 +553,31 @@ export default function Home() {
 
   return (
     <>
+      {/* SEO content — visually hidden, readable by crawlers and screen readers */}
+      <section className="sr-only" aria-label="About Pariwesh Tamrakar">
+        <h1>Pariwesh Tamrakar — AI Engineer &amp; Developer</h1>
+        <p>
+          I build immersive full-stack web applications and AI-powered systems
+          using React, Next.js, TypeScript, Three.js, Node.js, Python, and
+          Generative AI. Specializing in agentic AI pipelines, real-time 3D
+          WebGL experiences, and enterprise-grade developer tooling.
+        </p>
+        <ul>
+          {Object.values(skillsMetadata).map((skill) => (
+            <li key={skill.name}>
+              <strong>{skill.name}</strong>: {skill.desc}
+            </li>
+          ))}
+        </ul>
+      </section>
+
       {/* Immersive Loader overlay */}
       <div className="loader">
         <div className="wrap">
           <i>loading</i>
-          <a href="#" onClick={(e) => e.preventDefault()}>enter</a>
+          <a href="#" onClick={(e) => e.preventDefault()}>
+            enter
+          </a>
         </div>
         <span></span>
       </div>
@@ -512,12 +591,19 @@ export default function Home() {
           <div className="container-fluid">
             <div className="row">
               <div className="col-6">
-                <a className="header__lnk" href="#" onClick={(e) => e.preventDefault()}>
+                <a
+                  className="header__lnk"
+                  href="#"
+                  onClick={(e) => e.preventDefault()}
+                >
                   AI Engineer / Developer
                 </a>
               </div>
               <div className="col-6 d-flex align-items-center justify-content-end">
-                <a className="header__lnk--2 top-menu-lnk--3" href="mailto:hello@developer.ai">
+                <a
+                  className="header__lnk--2 top-menu-lnk--3"
+                  href="mailto:hello@developer.ai"
+                >
                   Let&apos;s talk
                 </a>
               </div>
@@ -541,12 +627,42 @@ export default function Home() {
 
             {/* Awards gallery elements (queried by bundle.js to render 3D floating panels) */}
             <div className="d-none" id="awards">
-              <img src="/static/images/awards/ui.png" alt="UI Award" className="img-fluid" data-title="1" />
-              <img src="/static/images/awards/ux.png" alt="UX Award" className="img-fluid" data-title="2" />
-              <img src="/static/images/awards/innovation.png" alt="Innovation Award" className="img-fluid" data-title="3" />
-              <img src="/static/images/awards/hm.png" alt="Honorable Mention" className="img-fluid" data-title="4" />
-              <img src="/static/images/awards/wod.png" alt="Site of the Day" className="img-fluid" data-title="5" />
-              <img src="/static/images/awards/jury.png" alt="Jury Badge" className="img-fluid" data-title="6" />
+              <img
+                src="/static/images/awards/ui.png"
+                alt="UI Award"
+                className="img-fluid"
+                data-title="1"
+              />
+              <img
+                src="/static/images/awards/ux.png"
+                alt="UX Award"
+                className="img-fluid"
+                data-title="2"
+              />
+              <img
+                src="/static/images/awards/innovation.png"
+                alt="Innovation Award"
+                className="img-fluid"
+                data-title="3"
+              />
+              <img
+                src="/static/images/awards/hm.png"
+                alt="Honorable Mention"
+                className="img-fluid"
+                data-title="4"
+              />
+              <img
+                src="/static/images/awards/wod.png"
+                alt="Site of the Day"
+                className="img-fluid"
+                data-title="5"
+              />
+              <img
+                src="/static/images/awards/jury.png"
+                alt="Jury Badge"
+                className="img-fluid"
+                data-title="6"
+              />
             </div>
           </main>
         </div>
@@ -564,7 +680,7 @@ export default function Home() {
                       className="footer__social-lnk"
                       target="_blank"
                       rel="noopener noreferrer"
-                      href="https://linkedin.com"
+                      href="https://linkedin.com/pariweshh"
                     >
                       LinkedIn
                     </a>
@@ -574,19 +690,9 @@ export default function Home() {
                       className="footer__social-lnk"
                       target="_blank"
                       rel="noopener noreferrer"
-                      href="https://github.com"
+                      href="https://github.com/pariweshh"
                     >
                       GitHub
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      className="footer__social-lnk"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      href="https://x.com"
-                    >
-                      X (Twitter)
                     </a>
                   </li>
                 </ul>
@@ -619,10 +725,7 @@ export default function Home() {
       </footer>
 
       {/* Frosted glass skill description overlay */}
-      <div
-        id="skill-desc-overlay"
-        className={focusedSkill ? "visible" : ""}
-      >
+      <div id="skill-desc-overlay" className={focusedSkill ? "visible" : ""}>
         {activeMetadata && (
           <>
             <div className="skill-title-wrap">
@@ -632,9 +735,7 @@ export default function Home() {
               >
                 {activeMetadata.name}
               </span>
-              <span className="skill-shape-name">
-                {activeMetadata.shape}
-              </span>
+              <span className="skill-shape-name">{activeMetadata.shape}</span>
             </div>
             <p className="skill-desc">{activeMetadata.desc}</p>
           </>
@@ -643,4 +744,3 @@ export default function Home() {
     </>
   );
 }
-
