@@ -1,6 +1,12 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import {
+  SITE_URL,
+  SITE_TITLE,
+  SITE_DESCRIPTION,
+  SOCIAL_LINKS,
+} from "./lib/config";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -12,28 +18,23 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const SITE_URL = "https://yourportfolio.dev";
-
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: "Pariwesh Tamrakar — AI Engineer & Developer",
-  description:
-    "AI Engineer and Developer specializing in React, Next.js, TypeScript, and Generative AI. Explore an immersive 3D WebGL portfolio.",
+  title: SITE_TITLE,
+  description: SITE_DESCRIPTION,
   authors: [{ name: "Pariwesh Tamrakar" }],
   robots: { index: true, follow: true },
   openGraph: {
     type: "website",
     url: SITE_URL,
-    title: "Pariwesh Tamrakar — AI Engineer & Developer",
-    description:
-      "AI Engineer and Developer specializing in React, Next.js, TypeScript, and Generative AI. Explore an immersive 3D WebGL portfolio.",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
     siteName: "Pariwesh Tamrakar Portfolio",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Pariwesh Tamrakar — AI Engineer & Developer",
-    description:
-      "AI Engineer and Developer specializing in React, Next.js, TypeScript, and Generative AI. Explore an immersive 3D WebGL portfolio.",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
   },
   alternates: {
     canonical: SITE_URL,
@@ -59,6 +60,7 @@ const personSchema = {
       "Redux",
     ],
     url: SITE_URL,
+    sameAs: [SOCIAL_LINKS.linkedin, SOCIAL_LINKS.github],
   },
 };
 

@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import * as THREE from "three";
 import { gsap } from "gsap";
+import { SOCIAL_LINKS } from "./lib/config";
 
 interface SkillData {
   name: string;
@@ -147,7 +148,6 @@ export default function Home() {
     script.src = "/dist/bundle.js";
     script.async = true;
     script.onload = () => {
-      console.log("Portfolio bundle loaded successfully.");
       setLoaded(true);
     };
     script.onerror = (err) => {
@@ -680,7 +680,7 @@ export default function Home() {
                       className="footer__social-lnk"
                       target="_blank"
                       rel="noopener noreferrer"
-                      href="https://linkedin.com/pariweshh"
+                      href={SOCIAL_LINKS.linkedin}
                     >
                       LinkedIn
                     </a>
@@ -690,7 +690,7 @@ export default function Home() {
                       className="footer__social-lnk"
                       target="_blank"
                       rel="noopener noreferrer"
-                      href="https://github.com/pariweshh"
+                      href={SOCIAL_LINKS.github}
                     >
                       GitHub
                     </a>
