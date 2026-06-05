@@ -145,7 +145,7 @@ export default function Home() {
 
     // 2. Load the bundle.js script dynamically inside client side after DOM mounts
     const script = document.createElement("script");
-    script.src = "/dist/bundle.js";
+    script.src = `/dist/bundle.js?v=${Date.now()}`;
     script.async = true;
     script.onload = () => {
       setLoaded(true);
